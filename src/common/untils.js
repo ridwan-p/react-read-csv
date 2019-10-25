@@ -9,6 +9,6 @@ const PHONE_COUNTRY = {
  * @return {String}
  */
 export const makePhoneContry = (phone, country = 'id') => {
-    let newPhone = phone.replace(/-/g, "")
+    let newPhone = phone.replace(/\D/g, "")
     return PHONE_COUNTRY[country] + ( (newPhone.substr(0,1) === "0" )? newPhone.substr(1) : newPhone )
 }
