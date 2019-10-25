@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import './App.css';
 import Papa from 'papaparse'
-import {makePhoneContry} from "./common/untils"
+import {makePhoneCountry} from "./common/untils"
 
 class App extends Component {
   constructor(props) {
@@ -38,14 +38,17 @@ class App extends Component {
           </thead>
           <tbody>
             {
-              contacts.map((item, i) =>
-                <tr key={i}>
-                  <td>{i+1}</td>
-                  <td>{item['Name']}</td>
-                  <td>{makePhoneContry(item['Phone 1 - Value'])}</td>
-                  <td><button>{item['status'] || 'X'}</button></td>
-                </tr>
-              )
+              contacts.map((item, i) => {
+                const phone = makePhoneCountry(item['Phone 1 - Value'])
+                return (
+                  <tr key={i}>
+                    <td>{i+1}</td>
+                    <td> <a href={`https://wa.me/${phone.replace(/\D/g, "")}?text=Saya%20tertarik%20untuk%20membeli%20mobil%20Anda`} target="_blank" rel="noopener noreferrer">{item['Name']}</a></td>
+                    <td>{phone}</td>
+                    <td><button>{item['status'] || 'X'}</button></td>
+                  </tr>
+                )
+              })
             }
           </tbody>
         </table>
